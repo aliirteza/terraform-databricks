@@ -4,6 +4,10 @@ resource "random_string" "naming" {
     upper = false
 }
 
+data "external" "me" {
+  program = ["az", "account", "show", "--query", "user"]
+}
+
 locals {
   prefix = "databricksdemo${random_string.naming.result}"
 
